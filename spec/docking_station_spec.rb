@@ -31,7 +31,7 @@ describe DockingStation do
     end
     it 'return_bike will accept bikes up to 20' do
       expect {
-        21.times do
+        20.times do
           subject.return_bike(Bike.new)
         end
       }.not_to raise_error
