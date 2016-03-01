@@ -1,0 +1,10 @@
+Obj               | Msg
+Person            |
+Docking station   |Release bike
+Bike              |Check condition
+
+Docking station   |Dock bike
+Docking station   |Show a bike
+Docking station   |Fail release on empty storage
+Docking station   |Fail dock on full storage
+Docking station   |Can store 20 bikes.
