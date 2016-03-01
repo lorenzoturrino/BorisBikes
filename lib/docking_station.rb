@@ -20,7 +20,6 @@ attr_reader :single_bike
   end
 
   def show_bike
-    puts "this is a bike"
     @single_bike
   end
 end
