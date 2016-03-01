@@ -9,7 +9,7 @@ attr_reader :single_bike
   end
 
   def release_bike
-    raise 'no more bikes left TODAY' unless @single_bike
+    raise 'no more bikes left TODAY try tomorrow' unless @single_bike
     out_bike, @single_bike = @single_bike, nil
     out_bike
   end
