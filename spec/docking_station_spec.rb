@@ -21,9 +21,16 @@ describe DockingStation do
       	bike = Bike.new
       	expect(subject.dock(bike)).to eq bike
       end
-      it 'dock method raises an error when trying to dock to a full rack' do
+      it 'dock method accept up to 20 Bike' do
         expect {
-          while true do
+          20.times do
+            subject.dock(Bike.new)
+          end
+        }.not_to raise_error
+      end
+      it 'dock method refuses bike if >20' do
+        expect {
+          21.times do
             subject.dock(Bike.new)
           end
         }.to raise_error("Station is full")

@@ -2,7 +2,9 @@ require './lib/docking_station.rb'
 
 docking_station = DockingStation.new
 
-while true
-	bike = Bike.new
-	docking_station.dock(bike)
-end
+20.times do |bike_number|
+	puts "docking bike #{bike_number}"
+	docking_station.dock(Bike.new)
+end # this should not fail
+
+docking_station.dock(Bike.new) #this should fail.
