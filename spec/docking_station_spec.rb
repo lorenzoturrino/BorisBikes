@@ -33,12 +33,21 @@ describe DockingStation do
       end
     end
 
-    it { is_expected.to respond_to(:bike_array) }
+    describe 'class properties:' do
+      it { is_expected.to respond_to(:bike_array) }
+      it 'returns docked bikes' do
+   		   bike = Bike.new
+    	    subject.dock(bike)
+    	     expect(subject.bike_array.last).to eq bike
+      end
+      it 'uses DEFAULT_CAPACITY when supplied no args' do
+        station = DockingStation.new
+        expect(station.bike_capacity).to eq(20)
+      end
+      it 'uses the given value as capacity when supplied one' do
+        station = DockingStation.new(55)
+        expect(station.bike_capacity).to eq(55)
+      end
 
-    it 'returns docked bikes' do
-   		bike = Bike.new
-    	subject.dock(bike)
-    	expect(subject.bike_array.last).to eq bike
     end
-
 end
