@@ -5,7 +5,7 @@ describe DockingStation do
     describe '#release_bike:' do
       it { is_expected.to respond_to :release_bike }
       it 'releases a bike' do
-        bike = Bike.new
+        bike = double(:bike)
         subject.dock(bike)
         expect(subject.release_bike).to eq bike
       end
@@ -13,7 +13,7 @@ describe DockingStation do
         expect { subject.release_bike }.to raise_error 'No bikes available'
       end
       it 'refuses to release a bike when broken' do
-        broken_bike = Bike.new
+        broken_bike = double(:bike)
         broken_bike.report_broken
         subject.dock(broken_bike)
         expect { subject.release_bike }.to raise_error('bike is broken')
@@ -25,21 +25,21 @@ describe DockingStation do
       it 'dock method accept up to max capacity of bikes' do
         expect {
           DockingStation::DEFAULT_CAPACITY.times do
-            subject.dock(Bike.new)
+            subject.dock(double(:bike))
           end
         }.not_to raise_error
       end
       it 'dock method refuses bike if over capacity' do
         expect {
           (DockingStation::DEFAULT_CAPACITY + 1).times do
-            subject.dock(Bike.new)
+            subject.dock(double(:bike))
           end
         }.to raise_error("Station is full")
       end
       it 'dock method accept both broken and working bikes' do
         expect {
-          DockingStation.new.dock(Bike.new)
-          broken_bike = Bike.new
+          DockingStation.new.dock(double(:bike))
+          broken_bike = double(:bike)
           broken_bike.report_broken
           DockingStation.new.dock(broken_bike)
         }.not_to raise_error
@@ -49,7 +49,7 @@ describe DockingStation do
     describe 'class properties:' do
       it { is_expected.to respond_to(:bike_array) }
       it 'returns docked bikes' do
-   		   bike = Bike.new
+   		   bike = double(:bike)
     	    subject.dock(bike)
     	     expect(subject.bike_array.last).to eq bike
       end
