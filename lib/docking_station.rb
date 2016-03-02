@@ -16,7 +16,7 @@ class DockingStation
 
   def dock(bike)
   	fail 'Station is full' if full?
-  	@bike_array << bike
+  	@bike_array << bike if bike.working?
   end
 
 	private
