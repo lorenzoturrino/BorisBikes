@@ -1,9 +1,14 @@
 require './lib/docking_station.rb'
 
-docking_station = DockingStation.new(30)
+docking_station = DockingStation.new
 
-broken_bike = Bike.new
-broken_bike.report_broken
+bike = Bike.new
+bike.report_broken
 
-docking_station.dock(broken_bike)
-docking_station.release_bike #to throw error
+repair_van = Van.new
+repair_van.send_to_repair(bike)
+
+workshop = Garage.new
+workshop.repair_bike(bike)
+
+repair_van.send_to_dock(fixed_bike)
