@@ -13,4 +13,18 @@ describe Garage do
 
   end
 
+  # describe 'fix' do
+    #
+    # it 'fixes bikes'  do
+    #   bike = double :bike
+    #   allow(bike).to receive(:broken).and_return(true)
+    #   bike.broken
+    #   subject.bikes << bike
+    #   subject.fix
+    #   allow(bike).to receive(:broken).and_return(false)
+    #   expect(bike.broken).to eq(false)
+    # end
+
+  # end
+
 end

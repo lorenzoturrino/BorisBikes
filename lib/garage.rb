@@ -1,5 +1,5 @@
 class Garage
-  
+
   attr_reader :bikes
 
   def initialize
@@ -14,5 +14,11 @@ class Garage
       end
     end
   end
+
+  #def fix
+  #  @bikes.each do |bike|
+  #    bike.broken = false
+  #  end
+  #end
 
 end
