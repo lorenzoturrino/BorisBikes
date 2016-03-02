@@ -49,6 +49,12 @@ describe DockingStation do
       expect{subject.release_bike}.to raise_error 'No bikes to release'
     end
 
+    it 'accepts all bikes' do
+      bike = Bike.new
+      subject.dock(bike,true)
+      expect(subject.bikes).to include(bike)
+    end
+
   end
 
 end
