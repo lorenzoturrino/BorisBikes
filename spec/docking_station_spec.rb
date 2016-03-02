@@ -37,6 +37,17 @@ describe DockingStation do
       expect{subject.dock(Bike.new)}.to raise_error 'Docking Station full'
     end
 
+    it 'can be reported as broken' do
+      bike = Bike.new
+      subject.dock(bike, true)
+      expect(bike).to be_broken
+    end
+
+    #it 'does not add broken bike to available bikes' do
+      #bike = Bike.new
+      #expect(subject.dock(bike, false)).to eq(DockingStation.new.bikes)
+    #end
+
   end
 
 end
