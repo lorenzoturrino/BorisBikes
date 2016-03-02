@@ -43,10 +43,11 @@ describe DockingStation do
       expect(bike).to be_broken
     end
 
-    #it 'does not add broken bike to available bikes' do
-      #bike = Bike.new
-      #expect(subject.dock(bike, false)).to eq(DockingStation.new.bikes)
-    #end
+    it 'does not release broken bike' do
+      bike = Bike.new
+      subject.dock(bike,true)
+      expect{subject.release_bike}.to raise_error 'No bikes to release'
+    end
 
   end
 
