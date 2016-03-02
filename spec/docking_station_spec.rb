@@ -2,6 +2,16 @@ require 'docking_station'
 
 describe DockingStation do
 
+  describe 'initialize' do
+
+    it 'creates a capacity limit' do 
+      station = DockingStation.new 3
+      3.times{station.dock(Bike.new)}
+      expect{station.dock(Bike.new)}.to raise_error 'Docking Station full'
+    end
+
+  end
+
   describe 'release_bike' do
 
     # try not to use - but for reference,
@@ -47,7 +57,7 @@ describe DockingStation do
 
     it 'raises an exception when there is already a bike docked' do
       station = DockingStation.new
-      20.times{station.dock(Bike.new)}
+      DockingStation::DEFAULT_CAPACITY.times{station.dock(Bike.new)}
       expect{station.dock(Bike.new)}.to raise_error 'Docking Station full'
     end
 
