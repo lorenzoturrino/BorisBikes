@@ -1,61 +1,64 @@
 require 'docking_station'
 
-describe 'release_bike' do
+describe DockingStation do
 
-  # try not to use - but for reference,
-  # let(:bike) {Bike.new}
+  describe 'release_bike' do
 
-  it 'releases a bike' do
-    station = DockingStation.new
-    station.dock(Bike.new)
-    expect(station.release_bike).to be_a Bike
+    # try not to use - but for reference,
+    # let(:bike) {Bike.new}
+
+    it 'releases a bike' do
+      station = DockingStation.new
+      station.dock(Bike.new)
+      expect(station.release_bike).to be_a Bike
+    end
+
+    it 'raises exception when no bikes to release' do
+      station = DockingStation.new
+      expect{station.release_bike}.to raise_error 'No bikes to release' if station.bikes.nil?
+    end
+
   end
 
-  it 'raises exception when no bikes to release' do
-    station = DockingStation.new
-    expect{station.release_bike}.to raise_error 'No bikes to release' if station.bikes.nil?
+  describe 'working?' do
+
+    it 'can test bike works' do
+      expect(Bike.new).to respond_to :working?
+    end
+
+    it 'bike works' do
+      expect(Bike.new).to be_working
+    end
+
   end
 
-end
+  describe 'dock' do
 
-describe 'working?' do
+    it 'docks a bike' do
+      expect(DockingStation.new).to respond_to(:dock).with(1).argument
+    end
 
-  it 'can test bike works' do
-    expect(Bike.new).to respond_to :working?
+    it 'docks given bike' do
+      station = DockingStation.new
+      bike = Bike.new
+      station.dock(bike)
+      expect(station.bikes).to eq([bike])
+    end
+
+    it 'raises an exception when there is already a bike docked' do
+      station = DockingStation.new
+      20.times{station.dock(Bike.new)}
+      expect{station.dock(Bike.new)}.to raise_error 'Docking Station full'
+    end
+
   end
 
-  it 'bike works' do
-    expect(Bike.new).to be_working
-  end
+  describe 'bikes' do
 
-end
+    it 'stores bikes' do
+      expect(DockingStation.new).to respond_to(:bikes)
+    end
 
-describe 'dock' do
-
-  it 'docks a bike' do
-    expect(DockingStation.new).to respond_to(:dock).with(1).argument
-  end
-
-  it 'docks given bike' do
-    station = DockingStation.new
-    bike = Bike.new
-    station.dock(bike)
-    expect(station.bikes).to eq([bike])
-  end
-
-  it 'raises an exception when there is already a bike docked' do
-    station = DockingStation.new
-    bike = Bike.new
-    station.dock(bike)
-    expect{station.dock(bike)}.to raise_error 'Docking Station full'
-  end
-
-end
-
-describe 'bikes' do
-
-  it 'stores bikes' do
-    expect(DockingStation.new).to respond_to(:bikes)
   end
 
 end
