@@ -20,7 +20,6 @@ describe DockingStation do
 
   describe 'dock' do
 
-
     it 'docks given bike' do
       subject.dock(bike)
       expect(subject.bikes).to eq([bike])

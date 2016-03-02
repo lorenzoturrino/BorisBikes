@@ -13,16 +13,16 @@ class DockingStation
 
   def release_bike
     fail 'No bikes to release' if empty?
-    bikesallbroken = true
+    bikes_all_broken = true
     @bikes.each do |bike|
       if bike.broken == false
-        bikesallbroken = false
+        bikes_all_broken = false
         @bikes.delete(bike)
         return bike
         break
       end
     end
-    fail 'No bikes to release' if bikesallbroken == true
+    fail 'No bikes to release' if bikes_all_broken == true
   end
 
   def dock (bike)
