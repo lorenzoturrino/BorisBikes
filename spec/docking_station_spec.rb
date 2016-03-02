@@ -17,16 +17,16 @@ describe DockingStation do
 
     describe '#dock:' do
       it { is_expected.to respond_to(:dock).with(1).argument }
-      it 'dock method accept up to 20 Bike' do
+      it 'dock method accept up to max capacity of bikes' do
         expect {
-          20.times do
+          DockingStation::DEFAULT_CAPACITY.times do
             subject.dock(Bike.new)
           end
         }.not_to raise_error
       end
-      it 'dock method refuses bike if >20' do
+      it 'dock method refuses bike if over capacity' do
         expect {
-          21.times do
+          (DockingStation::DEFAULT_CAPACITY + 1).times do
             subject.dock(Bike.new)
           end
         }.to raise_error("Station is full")
