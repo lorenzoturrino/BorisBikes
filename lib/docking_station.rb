@@ -10,6 +10,7 @@ class DockingStation
 
   def release_bike
     fail 'No bikes available' if empty?
+		fail 'bike is broken' unless @bike_array.last.working?
     @bike_array.pop
   end
 
