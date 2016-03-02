@@ -17,10 +17,6 @@ describe DockingStation do
 
     describe '#dock:' do
       it { is_expected.to respond_to(:dock).with(1).argument }
-      it 'docks something' do
-      	bike = Bike.new
-      	expect(subject.dock(bike)).to eq bike
-      end
       it 'dock method accept up to 20 Bike' do
         expect {
           20.times do
@@ -37,12 +33,12 @@ describe DockingStation do
       end
     end
 
-    it { is_expected.to respond_to(:bike) }
+    it { is_expected.to respond_to(:bike_array) }
 
     it 'returns docked bikes' do
    		bike = Bike.new
     	subject.dock(bike)
-    	expect(subject.bike).to eq bike
+    	expect(subject.bike_array.last).to eq bike
     end
 
 end
