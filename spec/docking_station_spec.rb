@@ -37,21 +37,16 @@ describe DockingStation do
       expect{subject.dock(Bike.new)}.to raise_error 'Docking Station full'
     end
 
-    it 'can be reported as broken' do
-      bike = Bike.new
-      subject.dock(bike, true)
-      expect(bike).to be_broken
-    end
-
     it 'does not release broken bike' do
       bike = Bike.new
-      subject.dock(bike,true)
+      bike.report_broken
+      subject.dock(bike)
       expect{subject.release_bike}.to raise_error 'No bikes to release'
     end
 
     it 'accepts all bikes' do
-      bike = Bike.new
-      subject.dock(bike,true)
+      bike = Bike.new.report_broken
+      subject.dock(bike)
       expect(subject.bikes).to include(bike)
     end
 
