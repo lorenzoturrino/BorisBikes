@@ -3,14 +3,15 @@ require 'docking_station'
 
 describe DockingStation do
   it {is_expected.to respond_to(:dock).with(1).argument}
+  it {is_expected.to respond_to(:dock).with(2).argument}
+
   it {is_expected.to respond_to :dock}
-  it {is_expected.to respond_to :bike}
+
 
   it 'expects capacity to be modifiable by the user' do
     station = DockingStation.new(5)
     expect(station.capacity).to eq 5
   end
-
 
   it 'expects instance of bike class' do
     bike1 = Bike.new
@@ -19,7 +20,7 @@ describe DockingStation do
   end
   it 'returns a true if the bike is working' do
     bike = Bike.new
-  expect(bike.working?).to be true
+  expect(bike.working).to be true
   end
 
   it 'dock the bike' do
@@ -45,6 +46,15 @@ describe DockingStation do
       end
       }.to raise_error(RuntimeError)
   end
+
+  it 'expects dock to receive a bike status "broken"' do
+    station = DockingStation.new
+    bike = Bike.new
+    station.dock(bike, 'broken')
+    expect(bike.working).to be false
+  end
+
+
 end
 =begin
   it 'should release a bike if there are bikes' do

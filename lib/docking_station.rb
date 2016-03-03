@@ -21,10 +21,13 @@ Default_capacity = 20
     end
   end
 
-  def dock(bike_name)
+  def dock(bike_name, *status)
     if full?
       raise 'station is full'
     else
+      if status.first == 'broken'
+        bike_name.working=false
+      end
     @docked_bikes << bike_name
     bike_name
     end
