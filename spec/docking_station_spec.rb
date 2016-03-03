@@ -2,6 +2,10 @@ require 'docking_station'
 
 
 describe DockingStation do
+
+  let(:bike) {double :bike, :working => false, :working= => 'anything'}
+
+
   it {is_expected.to respond_to(:dock).with(1).argument}
   it {is_expected.to respond_to(:dock).with(2).argument}
 
@@ -13,25 +17,20 @@ describe DockingStation do
     expect(station.capacity).to eq 5
   end
 
+
   it 'expects instance of bike class' do
-    bike1 = Bike.new
-    subject.dock(bike1)
-    expect(subject.release_bike).to be_a Bike
-  end
-  it 'returns a true if the bike is working' do
-    bike = Bike.new
-  expect(bike.working).to be true
+    subject.dock(bike)
+    expect(subject.release_bike).to eq bike
   end
 
   it 'dock the bike' do
-  bike1 = Bike.new
+  bike1 = bike
   expect(subject.dock(bike1)).to be  bike1
   end
 
   it 'should return a bike if one is docked' do
-    bike1 = Bike.new
-    subject.dock(bike1)
-    expect(subject.bike).to be bike1
+    subject.dock(bike)
+    expect(subject.bike).to be bike
   end
 
   it 'should raise an error if there are no bikes' do
@@ -39,23 +38,21 @@ describe DockingStation do
   end
 
   it 'should raise an error if station is full' do
-    bike1 = Bike.new
     expect{
       while true
-        subject.dock(bike1)
+        subject.dock(bike)
       end
     }.to raise_error(RuntimeError)
   end
 
   it 'expects dock to receive a bike status "broken"' do
     station = DockingStation.new
-    bike = Bike.new
     station.dock(bike, 'broken')
     expect(bike.working).to be false
   end
 
   it 'should not release a broken bike' do
-    subject.dock(Bike.new,'broken')
+    subject.dock(bike,'broken')
     expect {subject.release_bike}.to raise_error(RuntimeError)
   end
 
