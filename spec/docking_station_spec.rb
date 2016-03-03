@@ -6,6 +6,12 @@ describe DockingStation do
   it {is_expected.to respond_to :dock}
   it {is_expected.to respond_to :bike}
 
+  it 'expects capacity to be modifiable by the user' do
+    station = DockingStation.new(5)
+    expect(station.capacity).to eq 5
+  end
+
+
   it 'expects instance of bike class' do
     bike1 = Bike.new
     subject.dock(bike1)
@@ -46,4 +52,3 @@ end
     expect(subject.release_bike).to be @docked_bikes
   end
 =end
-
