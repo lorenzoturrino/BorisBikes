@@ -44,7 +44,7 @@ describe DockingStation do
       while true
         subject.dock(bike1)
       end
-      }.to raise_error(RuntimeError)
+    }.to raise_error(RuntimeError)
   end
 
   it 'expects dock to receive a bike status "broken"' do
@@ -52,6 +52,11 @@ describe DockingStation do
     bike = Bike.new
     station.dock(bike, 'broken')
     expect(bike.working).to be false
+  end
+
+  it 'should not release a broken bike' do
+    subject.dock(Bike.new,'broken')
+    expect {subject.release_bike}.to raise_error(RuntimeError)
   end
 
 

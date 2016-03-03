@@ -22,15 +22,15 @@ Default_capacity = 20
   end
 
   def dock(bike_name, *status)
-    if full?
-      raise 'station is full'
+    raise "station is full" if full?
+
+    if status.first == 'broken'
+      bike_name.working=false
     else
-      if status.first == 'broken'
-        bike_name.working=false
-      end
-    @docked_bikes << bike_name
-    bike_name
+      @docked_bikes << bike_name
     end
+
+    bike_name
   end
 
   def dock_status
