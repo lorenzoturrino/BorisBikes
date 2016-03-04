@@ -13,18 +13,12 @@ describe Garage do
 
   end
 
-  # describe 'fix' do
-    #
-    # it 'fixes bikes'  do
-    #   bike = double :bike
-    #   allow(bike).to receive(:broken).and_return(true)
-    #   bike.broken
-    #   subject.bikes << bike
-    #   subject.fix
-    #   allow(bike).to receive(:broken).and_return(false)
-    #   expect(bike.broken).to eq(false)
-    # end
-
-  # end
-
+  describe 'fix' do
+    it 'expect the :fix method to be called on bike' do
+      dummy_bike = double(:bike, broken: true)
+      subject.take_bikes([dummy_bike],true)
+      expect(dummy_bike).to receive(:fix)
+      subject.fix_all_bikes
+    end
+  end
 end
