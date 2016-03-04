@@ -1,18 +1,17 @@
 class Van
 
-  attr_reader :bikes
+  include BikeContainer
 
-  def initialize
-    @bikes = []
-  end
-
-  def take_bikes (location, to_fix)
-    location.each do |bike|
-      if bike.broken == to_fix
-        location.delete(bike)
-        @bikes << bike
+  def pick_up(location)
+    no_bikes_to_pick_up = true
+    location.bikes.each do |bike|
+      if bike.broken == true
+        no_bikes_to_pick_up = false
+        load_bike(bike)
+        location.bikes.delete(bike)
       end
     end
+    raise 'No bikes available!' if no_bikes_to_pick_up
   end
 
 end

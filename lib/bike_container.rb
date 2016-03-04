@@ -2,6 +2,8 @@ module BikeContainer
 
   DEFAULT_CAPACITY = 20
 
+  attr_accessor :bikes
+
   def initialize(capacity=DEFAULT_CAPACITY)
     @bikes = []
     @capacity = capacity
@@ -10,10 +12,6 @@ module BikeContainer
   def load_bike(bike)
     raise "FULL!" if full?
     @bikes << bike
-  end
-
-  def list_bikes
-    @bikes
   end
 
   def release_bike

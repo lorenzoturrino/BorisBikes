@@ -1,7 +1,7 @@
 require 'bike_container'
 
 shared_examples_for 'a bike_container' do
-  
+
   num = 5
   let(:bike_container) {described_class.new(num)}
   let(:bike) {double :bike}
@@ -14,7 +14,7 @@ shared_examples_for 'a bike_container' do
 
     it 'loads bike' do
       bike_container.load_bike(bike)
-      expect(bike_container.list_bikes).to eq([bike])
+      expect(bike_container.bikes).to eq([bike])
     end
 
     it 'raises error if container is full' do
